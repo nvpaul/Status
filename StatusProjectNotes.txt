@@ -1,0 +1,28 @@
+#Login Page
+The login page requires you to fill in the username and password fields before the login button will take you to the home page of the app.
+Note: At this point, you can type in anything you want for the username and password field, there are no specific accounts.
+
+#Status Page
+This is the landing/home page. On this page there is a slider with a submit button allowing the user to enter what they feel best describes the
+status of their mental health for the day. Once a user submits a status, the slider and submit button will be disabled, and a thank you message
+will be displayed. As well, the status that was submitted will appear in the column chart under the correct day. This chart shows all the users 
+status values for the current week, with a week beginning on Monday and ending on Sunday. The reamining values for the days that have past during 
+the week are hard coded, meaning they were pre-set in my code to be as follows: monday - 6, tuesday - 10, wednesday - 9, thursday - 9, friday - 10, 
+saturday - 8, and sunday - 10. 
+Note: The value the user submits is stored using sessionStorage. This will keep the users submitted value until the status app is opened in a new tab.
+This means that, within the current tab, you can switch pages and logout while the submitted value will be saved and displayed on the status page.
+The only way to reset this status, and go back to the user being able to submit a value for today is to open the status app in a new tab.
+
+#Connect Page
+This page displays 3 connections to the user, all with made up data. Clicking on the red or green arrow beside the names will expand the connections
+details, showing you their contact information. As well, in this expanded view there is a text entry box for submitting meeting notes. At this point
+in time, submitting the notes does nothing.
+
+#Resources Page
+Using a similar structure to the connections page, there is a list of mental health resources. Clicking the green arrow beside the name of the
+resource will expand the panel showing you any necessary details and contact information.
+
+#Other General Notes
+At the bottom of every page is a navigation menu resembling what you would find on a mobile/tablet app. Clicking on the different options are how
+you can navigate between the pages.
+As well, beside the logo "Status" at the top of each of the pages, there is a small logout button that will return you to the login page.

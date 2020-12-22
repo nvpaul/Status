@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Ensure web page is compatable with microsoft edge browser -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- Bootstrap CSS formatting -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- General Font awesome css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Font Awesome Kit -->
+		<!-- 
+		This is my personal kit (Naomi Paul), you can create your own at https://fontawesome.com/
+		To replace this kit with your own, click your profile, then click kits
+		replace the link in src with https://kit.fontawesome.com/YOURKITNUMBER 
+		-->
+	<script src="https://kit.fontawesome.com/f68f0c8845.js" crossorigin="anonymous"></script>
+
+	<!-- Personal CSS -->
+	<link rel="stylesheet" href="./css/styles.css">
+
+	<!-- Change the icon on the tab-->
+	<link rel="icon" src="" alt="">
+	
+	<!-- Title to display on the tab in your browser -->
+	<title>Status</title>
+</head>
+
+<body>
+	
+	<header>
+	</header>
+	
+	<div class="fullWidth">
+	
+		<!-- Floating Button: Logout -->
+			<!-- Return to login page within the current tab -->
+		<a class="FloatButton" href="index.html" target="_self">
+			<i class="fas fa-sign-out-alt my-float"></i>
+		</a>
+	
+		<!-- Logo and Page Header -->
+		<img class="logo" src="./img/StatusLogo.png" alt="status">
+		<h2 class="subTitle">Connect</h2>
+
+		<!-- List of Contacts -->
+		<!-- Clicking on the picture, name, or arrow on each contact is linked to their contact info -->
+		<div class="container">
+			<!-- Contact 1: Dominick Yates -->
+			<div class="row contactItem">
+				<a class="collapsible" href="#" alt="View Dominick Yates' Profile">
+					<img class="contactProfile" src="./img/DominickProfile.png" alt="">
+					<span class="contactName">Dominick Yates</span>
+					<i id="DominickContact" class="fas fa-caret-right contactArrow arrowGreen"></i>
+				</a>
+				<div class="contactDetails">
+					Phone: (123) 223-4579
+					<br>
+					Email: dominick.yates@status.com
+					<br>
+					<br>
+					Meeting Comments:
+					<br>
+					<form action="#" alt="Enter comments about your previous meeting">
+						<textarea name="comments" rows="6" cols="46" placeholder="Enter comments about your meetings here..."></textarea>
+						<br>
+						<input type="submit">
+					</form>
+					<br>
+					View Previous Meeting Notes:
+					<ul>
+						<li><a class="connectPrevNotes" href="#">2020-12-16</a></li>
+						<li><a class="connectPrevNotes" href="#">2020-09-08</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Contact 2: Cienna Busby -->
+			<div class="row contactItem">
+				<a class="collapsible" href="#" alt="View Cienna Busby's Profile">
+					<img class="contactProfile" src="./img/CiennaProfile.png" alt="">
+					<span class="contactName">Cienna Busby</span>
+					<i id="CIennaContact" class="fas fa-caret-right contactArrow arrowRed"></i>
+				</a>
+				<div class="contactDetails">
+					Phone: (123) 223-7395
+					<br>
+					Email: cienna.busby@status.com
+					<br>
+					<br>
+					Meeting Comments:
+					<br>
+					<form action="#" alt="Enter comments about your previous meeting">
+						<textarea name="comments" rows="6" cols="46" placeholder="Enter comments about your meetings here..."></textarea>
+						<br>
+						<input type="submit">
+					</form>
+					<br>
+					View Previous Meeting Notes:
+					<ul>
+						<li><a class="connectPrevNotes" href="#">2020-11-14</a></li>
+						<li><a class="connectPrevNotes" href="#">2020-10-12</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Contact 3: Kameron Pruitt -->
+			<div class="row contactItem">
+				<a class="collapsible" href="#" alt="View Kameron Pruitt's Profile">
+					<img class="contactProfile" src="./img/KameronProfile.png" alt="">
+					<span class="contactName">Kameron Pruitt</span>
+					<i id="KameronContact" class="fas fa-caret-right contactArrow arrowRed"></i>
+				</a>
+				<div class="contactDetails">
+					Phone: (123) 389-8470
+					<br>
+					Email: kameron.pruitt@status.com
+					<br>
+					<br>
+					Meeting Comments:
+					<br>
+					<form action="#" alt="Enter comments about your previous meeting">
+						<textarea name="comments" rows="6" cols="46" placeholder="Enter comments about your meetings here..."></textarea>
+						<br>
+						<input type="submit">
+					</form>
+					<br>
+					View Previous Meeting Notes:
+					<ul>
+						<li><a class="connectPrevNotes" href="#">2020-12-18</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Discussion Notification -->
+		<div class="container">
+			<div class="row contactNotification">
+				Your next discussion is with Cienna on April 22 at 15:00Z
+			</div>
+		</div>
+		
+		<!-- Map to show locations of contacts -->
+		<div class="mapContainer">
+			<img class="contactMap" src="./img/contactMap.jpg" alt="">
+		</div>
+
+	</div>
+	
+	
+	<!-- Tabbed Navigation Menu at Bottom of Page -->
+	<footer class="footer">
+		<div class="row">
+			<div class="col-xs-4 footerColumn footerOption">
+				<a href="status.html" class="navOption">STATUS</a>
+			</div>
+			<div class="col-xs-4 footerColumn footerActive">
+				<a href="#" class="navOption">CONNECT</a>
+			</div>
+			<div class="col-xs-4 footerColumn footerOption">
+				<a href="resources.html" class="navOption">RESOURCES</a>
+			</div>
+		</div>
+	</footer>
+	
+	
+	<!-- Collapse/Expand Functionality on Contact Inforamtion-->
+	<script>
+		var coll = document.getElementsByClassName("collapsible");
+		var i;
+		
+		for (i = 0; i < coll.length; i++) {
+			coll[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var contactDetails = this.nextElementSibling;
+				if (contactDetails.style.display === "block") {
+					contactDetails.style.display = "none";
+				} else {
+					contactDetails.style.display = "block";
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Ensure web page is compatable with microsoft edge browser -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- Bootstrap CSS formatting -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- General Font awesome css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<!-- Font Awesome Kit -->
+		<!-- 
+		This is my personal kit (Naomi Paul), you can create your own at https://fontawesome.com/
+		To replace this kit with your own, click your profile, then click kits
+		replace the link in src with https://kit.fontawesome.com/YOURKITNUMBER 
+		-->
+	<script src="https://kit.fontawesome.com/f68f0c8845.js" crossorigin="anonymous"></script>
+
+	<!-- Personal CSS -->
+	<link rel="stylesheet" href="./css/styles.css">
+
+	<!-- Change the icon on the tab-->
+	<link rel="icon" src="" alt="">
+	
+	<!-- Title to display on the tab in your browser -->
+	<title>Status</title>
+</head>
+
+<body>
+	
+	<header>
+	</header>
+	
+	<div class="fullWidth">
+		
+		<!-- Floating Button: Logout -->
+			<!-- Return to login page within the current tab -->
+		<a class="FloatButton" href="index.html" target="_self">
+			<i class="fas fa-sign-out-alt my-float"></i>
+		</a>
+	
+		<!-- Logo and Page Header -->
+		<img class="logo" src="./img/StatusLogo.png" alt="status">
+		<h2 class="subTitle">What's Yours?</h2>
+		
+		<!-- Slider to Enter Today's Rating -->
+		<div class="slidecontainer">
+		  <input type="range" min="1" max="10" value="7" class="slider" id="myRange">
+		</div>
+		<button id="enterStatus" type="submit" onclick="submitStatus()">Submit Status: <span id="pathRange"></span></button>
+		<br>
+		<p id="thank" class="thankMessage"><br></p>
+		<br>
+		
+		
+		<!-- Graph of Previous Weeks Ratings -->
+			<!-- Note to self: 300 full width, meaning 30px per score, width: 70px -->
+		<div class="contianer graphWidth">
+			<div class="row">
+				<!-- Monday -->
+				<div class="col-xs-1 graphItem">
+					<div class="row graphRow">
+						<img id="monItem" class="graphBar tempHide" src="./img/Status/six.png" alt="Mondays Status">
+					</div>
+					<div class="row dateRow">
+						<p class="graphDate">Mon</p>
+					</div>
+				</div>
+				<!-- Tuesday -->
+				<div class="col-xs-1 graphItem">
+					<div class="row graphRow">
+						<img id="tueItem" class="graphBar tempHide" src="./img/Status/ten.png" alt="Tuesdays Status">
+					</div>
+					<div class="row dateRow">
+						<p class="graphDate">Tue</p>
+					</div>
+				</div>
+				<!-- Wednesday -->
+				<div class="col-xs-1 graphItem">
+					<div class="row graphRow">
+						<img id="wedItem" class="graphBar tempHide" src="./img/Status/nine.png" alt="Wednesdays Status">
+					</div>
+					<div class="row dateRow">
+						<p class="graphDate">Wed</p>
+					</div>
+				</div>
+				<!-- Thursday -->
+				<div class="col-xs-1 graphItem">
+					<div class="row graphRow">
+						<img id="thuItem" class="graphBar tempHide" src="./img/Status/nine.png" alt="Thursdays Status">
+					</div>
+					<div class="row dateRow">
+						<p class="graphDate">Thu</p>
+					</div>
+				</div>
+				<!-- Friday -->
+				<div class="col-xs-1 graphItem">
+					<div class="row graphRow">
+						<img id="friItem" class="graphBar tempHide" src="./img/Status/ten.png" alt="Fridays Status">
+					</div>
+					<div class="row dateRow">
+						<p class="graphDate">Fri</p>
+					</div>
+				</div>
+				<!-- Saturday -->
+				<div class="col-xs-1 graphItem">
+					<div class="row graphRow">
+						<img id="satItem" class="graphBar tempHide" src="./img/Status/eight.png" alt="Saturdays Status">
+					</div>
+					<div class="row dateRow">
+						<p class="graphDate">Sat</p>
+					</div>
+				</div>
+				<!-- Sunday -->
+				<div class="col-xs-1 graphItem">
+					<div class="row graphRow">
+						<img id="sunItem" class="graphBar tempHide" src="./img/Status/ten.png" alt="Sundays Status">
+					</div>
+					<div class="row dateRow">
+						<p class="graphDate">Sun</p>
+					</div>			
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Tabbed Navigation Menu at Bottom of Page -->
+	<footer class="footer">
+		<div class="row">
+			<div class="col-xs-4 footerColumn footerActive">
+				<a href="#" class="navOption">STATUS</a>
+			</div>
+			<div class="col-xs-4 footerColumn footerOption">
+				<a href="connect.html" class="navOption">CONNECT</a>
+			</div>
+			<div class="col-xs-4 footerColumn footerOption">
+				<a href="resources.html" class="navOption">RESOURCES</a>
+			</div>
+		</div>
+	</footer>
+	
+	
+	
+	<!-- 
+		This script adjusts the slider and determines the current value. If the user already
+		submitted a status for today, the slider and submit button will be disabled and the
+		chart will automatically fill in today with the correct value based on the previously
+		saved value stored using sessionStorage.
+		This means the saved value will be saved as long as the current tab is open. To reset
+		the saved value, open the status app in a new tab.
+	-->	
+	<script>
+		{/* Determine if the user already submitted a status for today, save this as a bool to savedValue */}
+		{/* If the user submitted a status, one of these following paths will have been saved */}
+		const one = "./img/Status/one.png";
+		const two = "./img/Status/two.png";
+		const three = "./img/Status/three.png";
+		const four = "./img/Status/four.png";
+		const five = "./img/Status/five.png";
+		const six = "./img/Status/six.png";
+		const seven = "./img/Status/seven.png";
+		const eight = "./img/Status/eight.png";
+		const nine = "./img/Status/nine.png";
+		const ten = "./img/Status/ten.png";
+		
+		const savedValue = (sessionStorage.todayStatusSrc === one || sessionStorage.todayStatusSrc === two || sessionStorage.todayStatusSrc === three || sessionStorage.todayStatusSrc === four || sessionStorage.todayStatusSrc === five || sessionStorage.todayStatusSrc === six || sessionStorage.todayStatusSrc === seven || sessionStorage.todayStatusSrc === eight || sessionStorage.todayStatusSrc === nine || sessionStorage.todayStatusSrc === ten);
+		
+		{/* If status has already been submitted for today */}
+		if (savedValue) {
+			{/* Disable the slider and submit button */}
+			document.getElementById("enterStatus").disabled = 'true';
+			document.getElementById("myRange").disabled = true;
+			document.getElementById("thank").innerHTML = "Thank you for submitting your daily status!";
+			document.getElementById("enterStatus").innerHTML = "Submitted";
+			
+			{/* Fill in today on the chart with the correct value */}
+			switch (new Date().getDay()) {
+			  case 0:
+				var element = document.getElementById("sunItem");
+				element.classList.remove("tempHide");
+				element.src = sessionStorage.todayStatusSrc;
+				break;
+			  case 1:
+				var element = document.getElementById("monItem");
+				element.classList.remove("tempHide");
+				element.src = sessionStorage.todayStatusSrc;
+				break;
+			  case 2:
+				var element = document.getElementById("tueItem");
+				element.classList.remove("tempHide");
+				element.src = sessionStorage.todayStatusSrc;
+				break;
+			  case 3:
+				var element = document.getElementById("wedItem");
+				element.classList.remove("tempHide");
+				element.src = sessionStorage.todayStatusSrc;
+				break;
+			  case 4:
+				var element = document.getElementById("thuItem");
+				element.classList.remove("tempHide");
+				element.src = sessionStorage.todayStatusSrc;
+				break;
+			  case 5:
+				var element = document.getElementById("friItem");
+				element.classList.remove("tempHide");
+				element.src = sessionStorage.todayStatusSrc;
+				break;
+			  case  6:
+				var element = document.getElementById("satItem");
+				element.classList.remove("tempHide");
+				element.src = sessionStorage.todayStatusSrc;
+			}
+		}
+		else {
+			{/* If the status for today has not been submitted, allow the user to adjust the slider and submit a value */}
+			var slider = document.getElementById("myRange");
+			var output = document.getElementById("pathRange");
+			var curVal = slider.value;
+			
+			output.innerHTML = slider.value;
+
+			slider.oninput = function() {
+				curVal = this.value;
+				output.innerHTML = curVal;
+			}		
+		}	
+	</script>
+	
+	
+	<!-- 
+		This script determines the current day of the week and uses that information to 
+		pre-populate the entered status for all days that have past in the current week.
+		Note: Assuming a week starts on Monday and ends on Tuesday.
+	-->
+	<script>
+		{/* First determine the current day of the week, Monday being the first day, and Sunday being the last day of the week */}
+		var day;
+		var dayOfWeek;
+		switch (new Date().getDay()) {
+		  case 0:
+			day = "Sunday";
+			dayOfWeek = 7;
+			break;
+		  case 1:
+			day = "Monday";
+			dayOfWeek = 1;
+			break;
+		  case 2:
+			day = "Tuesday";
+			dayOfWeek = 2;
+			break;
+		  case 3:
+			day = "Wednesday";
+			dayOfWeek = 3;
+			break;
+		  case 4:
+			day = "Thursday";
+			dayOfWeek = 4;
+			break;
+		  case 5:
+			day = "Friday";
+			dayOfWeek = 5;
+			break;
+		  case  6:
+			day = "Saturday";
+			dayOfWeek = 6;
+		}
+		
+		{/* If after Monday, fill Monday*/}
+		if (dayOfWeek > 1) {
+			var element = document.getElementById("monItem");
+			element.classList.remove("tempHide");
+		}
+			
+		{/* If after Tuesday, fill Tuesday*/}
+		if (dayOfWeek > 2) {
+			var element = document.getElementById("tueItem");
+			element.classList.remove("tempHide");
+		}
+
+		{/* If after Wednesday, fill Wednesday*/}
+		if (dayOfWeek > 3) {
+			var element = document.getElementById("wedItem");
+			element.classList.remove("tempHide");
+		}
+			
+		{/* If after Thursday, fill Thursday*/}
+		if (dayOfWeek > 4) {
+			var element = document.getElementById("thuItem");
+			element.classList.remove("tempHide");
+		}
+			
+		{/* If after Friday, fill Friday*/}
+		if (dayOfWeek > 5) {
+			var element = document.getElementById("friItem");
+			element.classList.remove("tempHide");
+		}
+
+		{/* If after Saturday, fill Saturday*/}
+		if (dayOfWeek > 6) {
+			var element = document.getElementById("satItem");
+			element.classList.remove("tempHide");
+		}
+
+		{/* If Sunday do nothing else*/}
+	</script>
+	
+	<!-- 
+		This script determines the current day of the week and uses that information to 
+		fill the current days status when the user submits their selected value.
+		Note: Assuming a week starts on Monday and ends on Tuesday.
+	-->
+	<script>		
+		function submitStatus() {
+			{/* Display a message to the user thanking them for filling out their daily status */}
+			document.getElementById("thank").innerHTML = "Thank you for submitting your daily status!";
+			document.getElementById("enterStatus").innerHTML = "Submitted"
+			
+			{/* Disable button and slider after submitting a value */}
+			document.getElementById("enterStatus").disabled = 'true';
+			document.getElementById("myRange").disabled = true;
+
+		
+			{/* First determine the current day of the week, Monday being the first day, and Sunday being the last day of the week */}
+			var dayOfWeek;
+			switch (new Date().getDay()) {
+			  case 0:
+				dayOfWeek = 7;
+				break;
+			  case 1:
+				dayOfWeek = 1;
+				break;
+			  case 2:
+				dayOfWeek = 2;
+				break;
+			  case 3:
+				dayOfWeek = 3;
+				break;
+			  case 4:
+				dayOfWeek = 4;
+				break;
+			  case 5:
+				dayOfWeek = 5;
+				break;
+			  case  6:
+				dayOfWeek = 6;
+			}
+			
+			{/* Next determine the submitted value and the corresponding image src */}
+			var slider = document.getElementById("myRange");
+			var curVal = slider.value;
+			var pathText;
+			switch (curVal){
+				case 1:
+				case '1':
+					pathText = "./img/Status/one.png";
+					break;
+				case 2:
+				case '2':
+					pathText = "./img/Status/two.png";
+					break;
+				case 3:
+				case '3':
+					pathText = "./img/Status/three.png";
+					break;
+				case 4:
+				case '4':
+					pathText = "./img/Status/four.png";
+					break;
+				case 5:
+				case '5':
+					pathText = "./img/Status/five.png";
+					break;
+				case 6:
+				case '6':
+					pathText = "./img/Status/six.png";
+					break;
+				case 7:
+				case '7':
+					pathText = "./img/Status/seven.png";
+					break;
+				case 8:
+				case '8':
+					pathText = "./img/Status/eight.png";
+					break;
+				case 9:
+				case '9':
+					pathText = "./img/Status/nine.png";
+					break;
+				case 10:
+				case '10':
+					pathText = "./img/Status/ten.png";
+					break;
+			}
+				
+			{/* Based on the current day of the Week, fill the status graph with the correct value*/}
+			if (dayOfWeek === 1) {
+				var element = document.getElementById("monItem");
+				element.classList.remove("tempHide");
+				element.src = pathText;
+			}
+			else if (dayOfWeek === 2) {
+				var element = document.getElementById("tueItem");
+				element.classList.remove("tempHide");
+				element.src = pathText;
+			}
+			else if (dayOfWeek === 3) {
+				var element = document.getElementById("wedItem");
+				element.classList.remove("tempHide");
+				element.src = pathText;
+			}
+			else if (dayOfWeek === 4) {
+				var element = document.getElementById("thuItem");
+				element.classList.remove("tempHide");
+				element.src = pathText;
+			}
+			else if (dayOfWeek === 5) {
+				var element = document.getElementById("friItem");
+				element.classList.remove("tempHide");
+				element.src = pathText;
+			}
+			else if (dayOfWeek === 6) {
+				var element = document.getElementById("satItem");
+				element.classList.remove("tempHide");
+				element.src = pathText;
+			}
+			else if (dayOfWeek === 7) {
+				var element = document.getElementById("sunItem");
+				element.classList.remove("tempHide");
+				element.src = pathText;
+			}
+			
+			{/* Save todays status during the local session to the variable todayStatusSrc */}
+			{/* Note: This will save the value until the status app is opened in a new tab */}
+			sessionStorage.todayStatusSrc = pathText;
+			
+		}
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Ensure web page is compatable with microsoft edge browser -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- Bootstrap CSS formatting -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- General Font awesome css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<!-- Font Awesome Kit -->
+		<!-- 
+		This is my personal kit (Naomi Paul), you can create your own at https://fontawesome.com/
+		To replace this kit with your own, click your profile, then click kits
+		replace the link in src with https://kit.fontawesome.com/YOURKITNUMBER 
+		-->
+	<script src="https://kit.fontawesome.com/f68f0c8845.js" crossorigin="anonymous"></script>
+
+	<!-- Personal CSS -->
+	<link rel="stylesheet" href="./css/styles.css">
+
+	<!-- Change the icon on the tab-->
+	<link rel="icon" src="" alt="">
+	
+	<!-- Title to display on the tab in your browser -->
+	<title>Status</title>
+</head>
+
+<body>
+	
+	<header>
+	</header>
+	
+	<div class="fullWidth">
+	
+		<!-- Floating Button: Logout -->
+			<!-- Return to login page within the current tab -->
+		<a class="FloatButton" href="index.html" target="_self">
+			<i class="fas fa-sign-out-alt my-float"></i>
+		</a>
+	
+		<img class="logo" src="./img/StatusLogo.png" alt="status">
+		<h2 class="subTitle">Resources</h2>
+
+		<!-- List of Resources -->
+		<div class="container">
+			<div class="row contactItem">
+				<!-- Actual Service: https://www.crisisservicescanada.ca/en/looking-for-local-resources-support/ -->
+				<a class="collapsible" href="#" alt="View Contact Information for Crisis Services Canada">
+					<img class="resourcesProfile" src="./img/Resources/CrisisServicesCanada.jpg" alt="">
+					<span class="contactName">Crisis Services Canada</span>
+					<i id="CrisisServicesCanada" class="fas fa-caret-right contactArrow arrowGreen"></i>
+				</a>
+				<div class="contactDetails">
+					Decades of experience in providing distress and suicide prevention support to people all ages in need across Canada.
+					<br>
+					<br>
+					Call (24/7/365): 1 (833) 456-4566
+					<br>
+					Text (4pm - 12am ET): 45645
+					<br>
+					<br>
+				</div>
+			</div>
+			<!-- Made Up Resource 1: Company Resources -->
+			<div class="row contactItem">
+				<a class="collapsible" href="#" alt="View Contact Information for Company Resources">
+					<img class="resourcesProfile" src="./img/Resources/CompanyServices.jpg" alt="">
+					<span class="contactName">Company Offered Resources</span>
+					<i id="CompanyServies" class="fas fa-caret-right contactArrow arrowGreen"></i>
+				</a>
+				<div class="contactDetails">
+					Mental health resources and services offered through your airline.
+					<br>
+					<br>
+					Call: (677) 734-4985
+					<br>
+					<br>
+				</div>
+			</div>
+			<!-- Actual resource to search for resources -->
+			<div class="row contactItem lastItem">
+				<a class="collapsible" href="#" alt="View Resource to Search for More Services">
+					<img class="resourcesProfile" src="./img/Resources/Search.jpg" alt="">
+					<span class="contactName">Search for Services in your Area</span>
+					<i id="SearchForServices" class="fas fa-caret-right contactArrow arrowGreen"></i>
+				</a>
+				<div class="contactDetails">
+					Search for resources specific to your area (Within Canada).
+					<br>
+					<br>
+					Website: <a class="resourcesContactLink" href="https://www.crisisservicescanada.ca/en/looking-for-local-resources-support/" target="_blank">Search for local resources through Crisis Services Canada</a>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	
+	<!-- Tabbed Navigation Menu at Bottom of Page -->
+	<footer class="footer">
+		<div class="row">
+			<div class="col-xs-4 footerColumn footerOption">
+				<a href="status.html" class="navOption">STATUS</a>
+			</div>
+			<div class="col-xs-4 footerColumn footerOption">
+				<a href="connect.html" class="navOption">CONNECT</a>
+			</div>
+			<div class="col-xs-4 footerColumn footerActive">
+				<a href="#" class="navOption">RESOURCES</a>
+			</div>
+		</div>
+	</footer>
+	
+	
+	<!-- Collapse/Expand Functionality on Resource Details -->
+	<script>
+		var coll = document.getElementsByClassName("collapsible");
+		var i;
+		
+		for (i = 0; i < coll.length; i++) {
+			coll[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var contactDetails = this.nextElementSibling;
+				if (contactDetails.style.display === "block") {
+					contactDetails.style.display = "none";
+				} else {
+					contactDetails.style.display = "block";
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>
